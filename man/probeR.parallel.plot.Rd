@@ -1,29 +1,24 @@
-\name{probe.R.whole.gene}
-\alias{probe.R.whole.gene}
-\title{ Calculate the reliability of the whole genes }
+\name{probeR.parallel.plot}
+\alias{probeR.parallel.plot}
+\title{ Parallel coordinate plot of summary value and probe level data}
 \description{
-  calculate the reliability of the whole genes using summary variance and probe data variance
+  Parallel coordinate plot of summary value and probe level data is very useful to explore
+the probe level data with summary value gene by gene.
 }
 \usage{
-probe.R.whole.gene(data.summary, data.probe)
+probeR.parallel.plot(affy.ID,data.summary, data.probe)
 }
 \arguments{
+  \item{affy.ID}{affymetrix id}
   \item{data.summary}{ the summary values from the function exprs }
   \item{data.probe}{the normalized probe level data. They should be normalized using the same
 method for the summary values. Also they should be the same probe level data calculating
 the summary values. If the user use RMA with PM values,  this should be only PM values.}
 }
-\value{
-  \item{summary.var }{ the variance of the summary values}
-  \item{probe.var }{ the variance of the probe level data}
-  \item{probe.n }{ the number of probes}
-  \item{reliability }{ the reliability }
-  ...
-}
 \references{ Using Reliability with Gene Expression Models }
 \author{Eun-Kyung Lee, Dianne Cook, Heike Hofmann, Maneesha Aluru, and Steve Rodermel }
 
-\seealso{  \code{\link{probe.R}}, ~~~ }
+\seealso{  \code{\link{probeR}}, ~~~ }
 \examples{
 library(affy)
 data(affybatch.example)
@@ -31,11 +26,7 @@ eset<-expresso(affybatch.example,bg.correct=FALSE,normalize.method="quantiles",p
 data.summary<-exprs(eset)
 probe.norm<-normalize.AffyBatch.quantiles(affybatch.example,type="pmonly")
 data.probe<-log(probes(probe.norm),base=2)
-summary.value<-data.summary[1,]
-probe.value<-data.probe[1:16,]
-probe.R(summary.value,probe.value)
-data.rel<-probe.R.whole.gene(data.summary,data.probe)
-
+probeR.parallel.plot("D78156_at",data.summary,data.probe)
 }
 \keyword{ models }% at least one, from doc/KEYWORDS
 \keyword{ univar }% at least one, from doc/KEYWORDS

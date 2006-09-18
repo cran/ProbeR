@@ -1,29 +1,29 @@
-\name{probe.R}
-\alias{probe.R}
-\title{ Calculate the reliability of one gene }
+\name{probeR.wholegene}
+\alias{probeR.wholegene}
+\title{ Calculate the reliability of the whole genes }
 \description{
-  calculate the reliability of one gene using summary variance and probe data variance
+  calculate the reliability of the whole genes using summary variance and probe data variance
 }
 \usage{
-probe.R(summary.value, probe.value)
+probeR.wholegene(data.summary, data.probe)
 }
 \arguments{
-  \item{summary.value}{ the summary values of a specific gene for all the chips}
-  \item{probe.value}{the probe level data of a specific gene. It is a matrix that the number of row is the number of
-probes and the number of column is the number of chips}
+  \item{data.summary}{ the summary values from the function exprs }
+  \item{data.probe}{the normalized probe level data. They should be normalized using the same
+method for the summary values. Also they should be the same probe level data calculating
+the summary values. If the user use RMA with PM values,  this should be only PM values.}
 }
 \value{
   \item{summary.var }{ the variance of the summary values}
   \item{probe.var }{ the variance of the probe level data}
   \item{probe.n }{ the number of probes}
   \item{reliability }{ the reliability }
-   
   ...
 }
 \references{ Using Reliability with Gene Expression Models }
 \author{Eun-Kyung Lee, Dianne Cook, Heike Hofmann, Maneesha Aluru, and Steve Rodermel }
 
-\seealso{  \code{\link{probe.R.whole.gene}}, ~~~ }
+\seealso{  \code{\link{probeR}}, ~~~ }
 \examples{
 library(affy)
 data(affybatch.example)
@@ -33,8 +33,8 @@ probe.norm<-normalize.AffyBatch.quantiles(affybatch.example,type="pmonly")
 data.probe<-log(probes(probe.norm),base=2)
 summary.value<-data.summary[1,]
 probe.value<-data.probe[1:16,]
-probe.R(summary.value,probe.value)
-data.rel<-probe.R.whole.gene(data.summary,data.probe)
+probeR(summary.value,probe.value)
+data.rel<-probeR.wholegene(data.summary,data.probe)
 
 }
 \keyword{ models }% at least one, from doc/KEYWORDS

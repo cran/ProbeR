@@ -1,3 +1,0 @@
-probe.R     		calculate the reliability of one gene using summary variance and probe data variance
-probe.R.whole.gene 	calculate reliabilities for the whole genes
- 
